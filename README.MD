@@ -1,6 +1,5 @@
-/**
- *@author guoyongfeng
- *@descrition node
- *@date 2015-01-20
- */
+# author guoyongfeng
+# descrition node
+# date 2015-01-20
+
 
