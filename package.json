@@ -5,7 +5,4 @@
     "angular": "~1.2",
   },
   "main": "index.js",
-  "bin": {
-    // "node-echo": ""
-  }
 }
