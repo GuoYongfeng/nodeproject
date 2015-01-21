@@ -3,8 +3,8 @@ var port = process.env.PORT || 3000;
 
 var app = express();
 
-app.set('view engine', 'jade');
 app.set('views', './views');
+app.set('view engine', 'jade');
 
 app.listen(port);
 
@@ -12,7 +12,7 @@ console.log('app started on port: ' + port);
 
 app.get('/', function(req, res){
 	res.render('index', {
-		title: '首页',
+		title: '首页'
 	});
 });
 
