@@ -41,13 +41,13 @@ MovieSchema.statics = {
 		return this
 			.find({})
 			.sort('meta.updateAt') //按更新时间排序
-			exec(cb) //执行该回调函数
+			.exec(cb) //执行该回调函数
 	},
 	//查询单条数据
 	findById: function(id, cb){
 		return this
 			.findOne({_id: id})
-			exec(cb)
+			.exec(cb)
 	}
 }
 

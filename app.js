@@ -12,7 +12,7 @@ var Movie = require('./models/movie');
 var port = process.env.PORT || 3000;
 var app = express();
 
-mongoose.connect('mongodb:localhost/nodeproject');
+mongoose.connect('mongodb:localhost/movies');
 
 app.set('views', './views/pages');
 app.set('view engine', 'jade');
@@ -49,21 +49,17 @@ app.get('/movie/:id', function(req, res){
 });
 
 app.get('/movie/list', function(req, res){
-	res.render('list', {
-		title: '列表页',
-		movies: [{
-			title: '电影名字',
-			_id: 1,
-			doctor: 'guoyongfeng',
-			country: 'china',
-			title: 'new films',
-			year: 2015,
-			poster: '',
-			language: 'chinese',
-			flash: '',
-			summary: ''
-		}]
-	});
+	Movie.fetch(function(err, movie){
+		if(err){
+			console.log(err);
+		}
+
+		res.render('list', {
+			title: '列表页',
+			movies: movie
+		});
+	})
+	
 });
 
 app.get('/admin/movie', function(req, res){
@@ -82,6 +78,20 @@ app.get('/admin/movie', function(req, res){
 	});
 });
 
+//admin update page
+app.post('/admin/update/:id', function(req, res){
+	var id = req.params.id;
+
+	if( id ){
+		Movie.findById(id, function(err, movie){
+			res.render('admin', {
+				title: '后台更新页',
+				movies: movie
+			})
+		})
+	}
+})
+
 //post 表单内的数据
 app.post('/admin/movie/new', function(res, req){
 	var id = req.body.movie._id;
@@ -94,7 +104,33 @@ app.post('/admin/movie/new', function(res, req){
 				console.log(err);
 			}
 
-			_movie = _.extend()
+			_movie = _.extend(movie, movieobj);
+			_movie.save(function(err, movie){
+				if(err){
+					console.log(err);
+				}
+
+				res.redirect('/movie/' + movie._id);
+			})
 		});
+	} else {
+		_movie = new Movie({
+			doctor: movieobj.doctor,
+			title: movieobj.title,
+			country: movieobj.country,
+			language: movieobj.language,
+			year: movieobj.year,
+			poster: movieobj.poster,
+			summary: movieobj.summary,
+			flash: movieobj.flash
+		})
+
+		_movie.save(function(err, movie){
+			if(err){
+				console.log(err)
+			}
+
+			res.redirect('/movie/' + movie._id);
+		})
 	}
 })
