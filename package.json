@@ -8,5 +8,24 @@
   "dependencies": {
     "express": "3.5.0",
     "jade": "*"
-  }
+  },
+  "description": "node project for movie",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuoYongfeng/nodeproject.git"
+  },
+  "keywords": [
+    "movie",
+    "node",
+    "express",
+    "mongo"
+  ],
+  "author": "guoyongfeng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GuoYongfeng/nodeproject/issues"
+  },
+  "homepage": "https://github.com/GuoYongfeng/nodeproject"
 }
